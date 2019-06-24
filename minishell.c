@@ -5,12 +5,12 @@
 *		    子进程中进行程序替换
 *		4、进程等待
 */
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<errno.h>
-#include<string.h>
-#include<fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <fcntl.h>
 
 
 char buf[1024] = {0};
