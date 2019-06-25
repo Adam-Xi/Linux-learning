@@ -12,7 +12,6 @@
 #include <string.h>
 #include <fcntl.h>
 
-
 char buf[1024] = {0};
 int do_face()
 {
