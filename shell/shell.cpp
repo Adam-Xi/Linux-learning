@@ -6,6 +6,7 @@
 #include <sys/wait.h>
 using namespace std;
 
+
 //编程规范约定：
 //一个函数的输入参数用 const &
 //一个函数的输出参数用 *
