@@ -5,7 +5,6 @@
 *		    子进程中进行程序替换
 *		4、进程等待
 */
-
 #include<stdio.h>
 #include<unistd.h>
 #include<stdlib.h>
