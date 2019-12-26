@@ -10,3 +10,4 @@ analyse:analyse.c
 .PHONY:clean
 clean:
 	rm catch analyse
+
