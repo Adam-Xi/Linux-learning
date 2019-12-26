@@ -4,8 +4,6 @@
 #include <ctype.h>
 #include <pcap.h>  
 
-
-
 #define MAXBYTE2CAPTURE 65535  
       
 void processPacket(u_char *arg, const struct pcap_pkthdr *pkthdr, const u_char *packet) 
