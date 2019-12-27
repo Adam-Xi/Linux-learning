@@ -1,4 +1,3 @@
-.PHONY:all
 all:catch analyse
 
 catch:catch.c
