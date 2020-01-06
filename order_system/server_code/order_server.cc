@@ -2,6 +2,7 @@
 #include <jsoncpp/json/json.h>
 #include "httplib.h"
 #include "db.hpp"
+#include "util.hpp"
 
 const char* CONTENT_TYPE = "application/json";
 
@@ -192,8 +193,8 @@ int main()
                       resp.set_content(writer.write(resp_json), CONTENT_TYPE);
                       return ;
                 }
-                //2、校验body中的数据是否符合要求
-                if(req_json["table_id"].empty() || req_json["time"].empty() || req_json["dish_id"].empty())
+                //2、校验body中的数据是否符合要求 
+                if(req_json["table_id"].empty() || req_json["time"].empty() || req_json["dish_ids"].empty())
                 {
                       printf("order_table format error failed!\n");
                       resp_json["ok"] = false;
@@ -298,8 +299,15 @@ int main()
                //http:192.168.43.91:9094?table_id=xxx
                //通过代码突出index.html，即对index.html进行一定的处理和修改
                //从 query_string 获取到 table_id 填到页面的 {{table_id}}
+               
+               //获取 table_id
                const std::string& table_id = req.get_param_value("table_id");
                printf("table_id = %s\n", table_id.c_str());
+               std::string html;
+               FileUtil::ReadFile("./wwwroot/index.html", &html);
+               std::string html_out;
+               StringUtil::Replace(html,"{{table_id}}", table_id, &html_out);
+               resp.set_content(html_out, "text/html");
                });
     server.set_base_dir("./wwwroot");
     server.listen("0.0.0.0", 9094);
