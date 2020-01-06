@@ -1,5 +1,35 @@
 # 数据库的操作：
 
+> #include <mysql/mysql.h>
+>
+>   //1、创建句柄
+> MYSQL* mysql = mysql_init(NULL);
+>   //2、建立连接
+> if(mysql_real_connect(mysql, "127.0.0.1", "root", "9826", "order_system", 3306, NULL, 0) == NULL)
+> {
+>     printf("mysql connect failed! %s\n", mysql_error(mysql));
+>     return NULL;
+> }
+>   //3、设置编码方式
+> mysql_set_character_set(mysql, "utf8");
+>   //4、拼接SQL
+> char sql[1024 * 4] = {0};
+> sprintf(sql, "select dish_id, name, price from dish_table where dish_id = %d", dish_id);
+>   //5、执行SQL语句
+> int ret = mysql_query(mysql_, sql);
+>   //6、构造SQL结果集合
+> MYSQL_RES* result = mysql_store_result(mysql_);
+>   //7、获取结果集合中的行数
+> int rows = mysql_num_rows(result);
+>   //8、根据行数遍历每一行，获取每一行中的数据
+> MYSQL_ROW row = mysql_fetch_row(result);
+>   //9、释放结果集合的空间，避免内存泄漏
+> mysql_free_result(result);
+>   //10、关闭数据库句柄
+> mysql_close(mysql);
+
+
+
 # 前后端交互需要的接口：
 ----(Restful风格的API)
 a)使用HTTP方法表示操作的语义
@@ -11,6 +41,7 @@ c)使用body表示操作过程中的一些具体数据，通常使用json格式�
 
 1、新增菜品
     //传统的方式：Get/dish?method=insert&name=京酱肉丝&price=2000
+
     请求：
     POST /dish
     {
